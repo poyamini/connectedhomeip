@@ -44,7 +44,7 @@
 #include "rsi_wlan.h"
 #include "rsi_wlan_apis.h"
 #include "rsi_wlan_config.h"
-//#include "rsi_wlan_non_rom.h"
+// #include "rsi_wlan_non_rom.h"
 #include "rsi_bootup_config.h"
 #include "rsi_error.h"
 
@@ -426,18 +426,22 @@ static void wfx_rsi_save_ap_info()
         wfx_rsi.ap_chan      = rsp.scan_info->rf_channel;
         memcpy(&wfx_rsi.ap_mac.octet[0], &rsp.scan_info->bssid[0], BSSID_MAX_STR_LEN);
     }
-    if ((wfx_rsi.sec.security == RSI_WPA) || (wfx_rsi.sec.security == RSI_WPA2))
-    {
-        // saving the security before changing into mixed mode
-        security             = wfx_rsi.sec.security;
-        wfx_rsi.sec.security = RSI_WPA_WPA2_MIXED;
-    }
-    if (wfx_rsi.sec.security == SME_WPA3)
-    {
-        // returning 3 for WPA3 when DGWIFI read security-type is called
-        security             = WPA3_SECURITY;
-        wfx_rsi.sec.security = RSI_WPA3;
-    }
+#if WIFI_ENABLE_SECURITY_MODE_WPA3_TRANSITION
+    // returning 3 for WPA3 when DGWIFI read security-type is called
+    WFX_RSI_LOG("WPA3_TRANSITION_MODE security mode enabled\r\n");
+    security             = wfx_rsi.sec.security;
+    wfx_rsi.sec.security = RSI_WPA3_TRANSITION;
+#elif WIFI_ENABLE_SECURITY_MODE_WPA_MIXED
+    // saving the security before changing into mixed mode
+    WFX_RSI_LOG("WPA_MIXED_MODE security mode enabled\r\n");
+    security = wfx_rsi.sec.security;
+    wfx_rsi.sec.security = RSI_WPA_WPA2_MIXED;
+#elif WIFI_ENABLE_SECURITY_MODE_WPA3_ONLY
+    // returning 3 for WPA3 when DGWIFI read security-type is called
+    WFX_RSI_LOG("WPA3_ONLY_MODE security mode enabled\r\n");
+    security             = WPA3_SECURITY;
+    wfx_rsi.sec.security = RSI_WPA3;
+#endif
     WFX_RSI_LOG("%s: WLAN: connecting to %s==%s, sec=%d, status=%02x", __func__, &wfx_rsi.sec.ssid[0], &wfx_rsi.sec.passkey[0],
                 wfx_rsi.sec.security, status);
 }
@@ -729,11 +733,9 @@ void wfx_rsi_task(void * arg)
 #ifdef SL_WFX_CONFIG_SOFTAP
         /* TODO */
         if (flags & WFX_EVT_AP_START)
-        {
-        }
+        {}
         if (flags & WFX_EVT_AP_STOP)
-        {
-        }
+        {}
 #endif /* SL_WFX_CONFIG_SOFTAP */
     }
 }
