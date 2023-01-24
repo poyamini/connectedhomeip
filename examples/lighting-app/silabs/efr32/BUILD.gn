@@ -289,7 +289,7 @@ efr32_executable("lighting_app") {
     } else if (rs91x_security_mode == "wpa3_transition") {
       # TODO: Change this macro once WF200 support is provided
       defines += [ "WIFI_ENABLE_SECURITY_MODE_WPA3_TRANSITION=1" ]
-    }else if (rs91x_security_mode == "wpa_mixed") {
+    } else if (rs91x_security_mode == "wpa_mixed") {
       # TODO: Change this macro once WF200 support is provided
       defines += [ "WIFI_ENABLE_SECURITY_MODE_WPA_MIXED=1" ]
     }
