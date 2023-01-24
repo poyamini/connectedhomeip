@@ -78,7 +78,7 @@ uint8_t security;
  * @fn   int32_t wfx_rsi_get_ap_info(wfx_wifi_scan_result_t *ap)
  * @brief
  *       Getting the AP details
- k* @param[in] ap: access point
+ * @param[in] ap: access point
  * @return
  *        status
  *********************************************************************/
