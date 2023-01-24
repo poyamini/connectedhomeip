@@ -44,7 +44,7 @@
 #include "rsi_wlan.h"
 #include "rsi_wlan_apis.h"
 #include "rsi_wlan_config.h"
-// #include "rsi_wlan_non_rom.h"
+//#include "rsi_wlan_non_rom.h"
 #include "rsi_bootup_config.h"
 #include "rsi_error.h"
 
@@ -78,7 +78,7 @@ uint8_t security;
  * @fn   int32_t wfx_rsi_get_ap_info(wfx_wifi_scan_result_t *ap)
  * @brief
  *       Getting the AP details
- * @param[in] ap: access point
+ k* @param[in] ap: access point
  * @return
  *        status
  *********************************************************************/
@@ -733,9 +733,11 @@ void wfx_rsi_task(void * arg)
 #ifdef SL_WFX_CONFIG_SOFTAP
         /* TODO */
         if (flags & WFX_EVT_AP_START)
-        {}
+        {
+        }
         if (flags & WFX_EVT_AP_STOP)
-        {}
+        {
+        }
 #endif /* SL_WFX_CONFIG_SOFTAP */
     }
 }
