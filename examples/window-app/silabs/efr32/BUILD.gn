@@ -55,9 +55,9 @@ declare_args() {
   # Argument to Disable IPv4 for wifi(rs911)
   chip_enable_wifi_ipv4 = false
 
-  # "wpa_mixed" to force enable WPA/WPA2 security on rs91x
-  # "wpa3_transition" to force enable WPA2/WPA3 security on rs91x
-  # "wpa3_only" to force enable WPA3 security on rs91x
+  # "wpa_mixed" to force enable WPA/WPA2 security on rs91x
+  # "wpa3_transition" to force enable WPA2/WPA3 security on rs91x
+  # "wpa3_only" to force enable WPA3 security on rs91x
   rs91x_security_mode = "wpa3_transition"
 
   #default WiFi SSID
