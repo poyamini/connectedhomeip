@@ -61,7 +61,9 @@ declare_args() {
   # Argument to Disable IPv4 for wifi(rs911)
   chip_enable_wifi_ipv4 = false
 
-  # Argument to force enable WPA2/WPA3 security on rs91x
+  # "wpa_mixed" to force enable WPA/WPA2 security on rs91x
+  # "wpa3_transition" to force enable WPA2/WPA3 security on rs91x
+  # "wpa3_only" to force enable WPA3 security on rs91x
   rs91x_security_mode = "wpa3_transition"
 
   #default WiFi SSID
@@ -301,13 +303,10 @@ efr32_executable("light_switch_app") {
     }
 
     if (rs91x_security_mode == "wpa3_only") {
-      # TODO: Change this macro once WF200 support is provided
       defines += [ "WIFI_ENABLE_SECURITY_MODE_WPA3_ONLY=1" ]
     } else if (rs91x_security_mode == "wpa3_transition") {
-      # TODO: Change this macro once WF200 support is provided
       defines += [ "WIFI_ENABLE_SECURITY_MODE_WPA3_TRANSITION=1" ]
     } else if (rs91x_security_mode == "wpa_mixed") {
-      # TODO: Change this macro once WF200 support is provided
       defines += [ "WIFI_ENABLE_SECURITY_MODE_WPA_MIXED=1" ]
     }
   }
