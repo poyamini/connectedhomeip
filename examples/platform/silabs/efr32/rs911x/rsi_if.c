@@ -459,7 +459,6 @@ static void wfx_rsi_save_ap_info() // translation
 #else
         wfx_rsi.sec.security = WFX_SEC_WPA2;
 #endif /* WIFI_ENABLE_SECURITY_WPA3_TRANS */
-        break;
     default:
         wfx_rsi.sec.security = WFX_SEC_UNSPECIFIED;
         break;
